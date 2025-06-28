@@ -8,31 +8,23 @@ We recommend a hardware with at least 32GB available disk space to run this arti
 
 ## Getting Started Guide
 
-This artifact is implemented with Python3.9 on anaconda. The python environment is specific in document ```environment.yml```. For convenience, we build a docker image for the artifact. Before proceding, please ensure Docker is installed (```sudo docker run hello-world``` will test your installation). If Docker is not installed, please follow the [official installation guide](https://docs.docker.com/get-docker/). This guide was tested using Docker version 20.10.23, but any contemporary Docker version is expected to work.
+This artifact is implemented with Python3.9. For convenience, we build a docker image for the artifact. Before proceding, please ensure Docker is installed (```sudo docker run hello-world``` will test your installation). If Docker is not installed, please follow the [official installation guide](https://docs.docker.com/get-docker/). This guide was tested using Docker version 20.10.23, but any contemporary Docker version is expected to work.
 
 ### Use the Pre-Built Docker Image
 Our pre-built docker image could be fetched from Docker Hub:
 ```
-docker pull ...
+docker pull wyuning/RoboScribe:latest
 ```
 
 To launch a shell in the docker image:
 ```
-docker run --it ...
+docker run --it --gpu all wyuning/RoboScribe:latest
 ```
-
-Enter the root path of the code:
-```
-cd ...
-```
+Once the container successfully starts, you should be automatically placed in the folder called `/RoboScribe` where all our code and scripts are located.
 
 ### Basic Test
-To verift the artifact could be operating successfully, we provide a script for brief test. Enter the anaconda environment ```demo_new```:
-```
-conda activate demo_new
-```
 
-Then run the simple test script:
+Run the simple test script:
 ```
 sh basic_test.sh
 ```
@@ -56,11 +48,6 @@ Under each folder, a tensorboard log will be stored in ```debug_policy_0``` fold
 The last sentence and certain files will miss for a **failed test**.
 
 ## Step-by-step Instruction
-
-To run the artifact, please make sure you are under the conda environment ```demo_new```. Otherwise, please enter the anaconda environment as:
-```
-conda activate demo_new
-```
 
 In the artifact, we use ```wandb``` to store data for iterative program training. Please login your wandb account before running the artifact with:
 ```
