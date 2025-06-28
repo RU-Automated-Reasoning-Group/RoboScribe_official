@@ -18,7 +18,7 @@ docker pull wyuning/RoboScribe:latest
 
 To launch a shell in the docker image:
 ```
-docker run --it --gpu all wyuning/RoboScribe:latest
+docker run --it --gpu all wyuning/roboscribe:latest
 ```
 Once the container successfully starts, you should be automatically placed in the folder called `/RoboScribe` where all our code and scripts are located.
 
