@@ -13,12 +13,12 @@ This artifact is implemented with Python3.9. For convenience, we build a docker 
 ### Use the Pre-Built Docker Image
 Our pre-built docker image could be fetched from Docker Hub:
 ```
-docker pull wyuning/RoboScribe:latest
+docker pull wyuning/roboscribe:latest
 ```
 
 To launch a shell in the docker image:
 ```
-docker run --it --gpu all wyuning/roboscribe:latest
+docker run -it --gpus all wyuning/roboscribe:latest
 ```
 Once the container successfully starts, you should be automatically placed in the folder called `/RoboScribe` where all our code and scripts are located.
 
