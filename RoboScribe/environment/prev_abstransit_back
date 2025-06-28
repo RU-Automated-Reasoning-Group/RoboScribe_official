@@ -1,0 +1,83 @@
+class AbsTransit_back:
+    def __init__(self):
+        self.add_dim = 6
+
+    def get_abs_obs(self, obs):
+        # distance between objects
+        related_pos = self.get_related_pos(obs)
+
+        # angles between objects
+        related_angle = self.get_related_angle(obs)
+
+        return np.concatenate([obs, related_pos, related_angle], axis=1)
+
+    def get_related_pos(self, obs):
+        gripper_pos = obs[:, 0:3]
+        block_pos = obs[:, 5:8]
+
+        return block_pos - gripper_pos
+    
+    def get_related_angle(self, obs):
+        gripper_pos = obs[:, 0:3]
+        block_pos = obs[:, 5:8]
+        related_pos = block_pos - gripper_pos
+        
+        related_dist = np.sqrt(np.sum(related_pos**2, axis=1, keepdims=True))
+        related_angle = [np.arccos(related_pos[:, 0:1]/related_dist), 
+                         np.arccos(related_pos[:, 1:2]/related_dist),
+                         np.arccos(related_pos[:, 2:3]/related_dist)]
+        related_angle = np.concatenate(related_angle, axis=1)
+        
+        return related_angle
+
+class AbsTransit_gt_back:
+    def __init__(self):
+        self.add_dim = 0
+
+    def get_abs_obs(self, obs):
+        # distance between objects
+        b_g_pos, b_goal_pos, g_goal_pos = self.get_abs_related_pos(obs)
+
+        return np.concatenate([b_g_pos, b_goal_pos, g_goal_pos, obs[:, 3:5]], axis=1)
+
+    def get_abs_related_pos(self, obs):
+        gripper_pos = obs[:, 0:3]
+        block_pos = obs[:, 5:8]
+        goal_pos = obs[:, 8:11]
+
+        return np.abs(block_pos-gripper_pos), np.abs(block_pos-goal_pos), np.abs(gripper_pos-goal_pos)
+
+class AbsTransit_2:
+    def __init__(self):
+        self.add_dim = 3
+
+    def get_abs_obs(self, obs):
+        # distance between objects
+        gripper_block_dist, goal_block_dist, gripper_goal_dist = self.get_distance(obs)
+        gripper_block_z_dist, goal_block_z_dist, goal_gripper_z_dist = self.get_z_distance(obs)
+
+        return np.concatenate([gripper_block_dist, goal_block_dist, gripper_goal_dist, \
+                               obs[:, 3:5], \
+                               gripper_block_z_dist, goal_block_z_dist, goal_gripper_z_dist], \
+                            axis=1)
+        # return np.concatenate([gripper_block_dist, goal_block_dist, gripper_goal_dist, obs[:, 3:5], obs[:, 0:3], obs[:, 5:8], obs[:, 8:11]], axis=1)
+
+    def get_distance(self, obs):
+        gripper_pos = obs[:, 0:3]
+        # block_pos = obs[:, 5:8]
+        block_pos = obs[:, 10:13]
+        # goal_pos = obs[:, 8:11]
+        goal_pos = obs[:, -6:-3]
+
+        gripper_block_dist = np.sqrt(np.sum((gripper_pos-block_pos)**2, axis=-1, keepdims=True))
+        goal_block_dist = np.sqrt(np.sum((goal_pos-block_pos)**2, axis=-1, keepdims=True))
+        gripper_goal_dist = np.sqrt(np.sum((gripper_pos-goal_pos)**2, axis=-1, keepdims=True))
+
+        return gripper_block_dist, goal_block_dist, gripper_goal_dist
+    
+    def get_z_distance(self, obs):
+        gripper_pos = obs[:, 0:3]
+        block_pos = obs[:, 10:13]
+        goal_pos = obs[:, -6:-3]
+
+        return gripper_pos[:, -1:]-block_pos[:, -1:], goal_pos[:, -1:]-block_pos[:, -1:], goal_pos[:, -1:]-gripper_pos[:, -1:]

@@ -1,0 +1,12 @@
+
+-------------------------------------------
+current attempt: 0
+current task contains:
+S0-->S1-->
+          
+S0: NA / False / num:0.0 
+S1: <Environment Reward> / False / num:59.615 
+
+-------------------------------------------
+
+starting training to current 1 function list
