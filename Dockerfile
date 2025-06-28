@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.3.0-base-ubuntu22.04
 
 RUN apt update
 RUN apt -y install software-properties-common
@@ -68,6 +68,10 @@ RUN unzip /tmp/demo.zip -d /tmp/demo_content \
 RUN gdown --fuzzy https://drive.google.com/file/d/1okHY_ZIRTudRCgY_4FXRF6namYtt95JE/view?usp=sharing -O /tmp/maniskill_data.zip
 RUN unzip /tmp/maniskill_data.zip -d /tmp/maniskill_data_content \
  && cp -r /tmp/maniskill_data_content/* /RoboScribe/environment/ManiSkill2-0.4.2
+
+RUN gdown --fuzzy https://drive.google.com/file/d/1m-h0XAAHQEdMn2QdxsSmdEvtFdw_7Ff2/view?usp=sharing -O /tmp/store_backup.zip
+RUN unzip /tmp/store_backup.zip -d /tmp/store_backup_content \
+ && cp -r /tmp/store_backup_content/store_backup  /RoboScribe/store_backup
 
 RUN python3.9 -m pip install /RoboScribe/environment/ManiSkill2-0.4.2/
 

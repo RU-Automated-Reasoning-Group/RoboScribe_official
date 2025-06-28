@@ -1,5 +1,5 @@
 test_drawer_pickplacecubemulti(){
-    CUDA_VISIBLE_DEVICES=$1 python basic_test.py \
+    CUDA_VISIBLE_DEVICES=$1 python3.9 basic_test.py \
     --seed 0 \
     --log_path brief_test_drawer_pickplacemulti.txt \
     --skill_path store/brief_test_drawer_pickplacemulti/debug_skill \
@@ -48,7 +48,7 @@ test_drawer_pickplacecubemulti(){
 }
 
 test_push_multi(){
-    CUDA_VISIBLE_DEVICES=$1 python basic_test.py \
+    CUDA_VISIBLE_DEVICES=$1 python3.9 basic_test.py \
     --seed 0 \
     --log_path brief_test_push_block3.txt \
     --skill_path store/brief_test_push_block3/debug_skill \
@@ -94,7 +94,7 @@ test_push_multi(){
 }
 
 test_tower(){
-    CUDA_VISIBLE_DEVICES=$1 python basic_test.py \
+    CUDA_VISIBLE_DEVICES=$1 python3.9 basic_test.py \
     --seed 0 \
     --log_path brief_test_tower5.txt \
     --skill_path store/brief_test_tower5/debug_skill \
@@ -141,7 +141,7 @@ test_tower(){
 }
 
 test_pickplace_multi_4(){
-    CUDA_VISIBLE_DEVICES=$1 python basic_test.py \
+    CUDA_VISIBLE_DEVICES=$1 python3.9 basic_test.py \
     --seed 0 \
     --log_path brief_test_pickplace_multi.txt \
     --skill_path store/brief_test_pickplace_multi/debug_skill \
