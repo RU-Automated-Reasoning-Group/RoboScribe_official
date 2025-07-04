@@ -1,4 +1,8 @@
-FROM nvidia/cuda:12.3.0-base-ubuntu22.04
+FROM fxiangucsd/sapien-rl-env
+
+ENV DEBIAN_FRONTEND=noninteractive 
+RUN rm /etc/apt/sources.list.d/cuda.list
+# RUN rm /etc/apt/sources.list.d/nvidia-ml.list
 
 RUN apt update
 RUN apt -y install software-properties-common
@@ -17,14 +21,13 @@ RUN mkdir -p /root/.mujoco && \
 # ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
 ENV LD_LIBRARY_PATH=/root/.mujoco/mujoco210/bin
 
-ENV DEBIAN_FRONTEND=noninteractive 
 
 RUN apt -y install python3.9-dev 
 RUN apt -y install python3-pip 
 RUN apt -y install python3.9-distutils
 RUN python3.9 -m pip install pip==22.0.3
 RUN python3.9 -m pip install numpy==1.23.0
-RUN python3.9 -m pip install torch==1.11.0
+RUN python3.9 -m pip install torch==1.13.1
 RUN python3.9 -m pip install tqdm==4.62.3
 
 
@@ -77,4 +80,7 @@ RUN python3.9 -m pip install /RoboScribe/environment/ManiSkill2-0.4.2/
 
 RUN apt -y install libvulkan1 mesa-vulkan-drivers
 
+ENV CONDA_AUTO_ACTIVATE_BASE=false
+
 WORKDIR /RoboScribe
+RUN mkdir logs
