@@ -112,6 +112,22 @@ An execution result is provided in ```logs_backup/tree_tower5.txt``` and ```stor
 
 ---
 
+
+### PickCubeDrawer Environment
+
+To run RoboScribe to generate robot-control program for PickCubeDrawer environment (first figure in the second row of Figure.18 in the paper), run the script as:
+```
+sh main_v7_opendrawer.sh
+```
+
+The script will take demonstration ```store/demo_store/opendrawer_pickplacecube3_crop.npy``` as input to synthesize abstract subtask tree and train low-level policies step-by-step. RoboScribe also generates iterative program for PickCubeDrawer to handle arbitrary number of blocks and repeated routine. The log file will be stored in ```logs/tree_drawer_pickplacecubemulti.txt```. The candidate abstraction predicate refinement for each step, the result abstract subtask trees and evaluation success rate to achieve speciftic reward are expected to be included in the log file. 
+
+The abstract subtask tree and low-level polices will be stored in ```store/tree_drawer_pickplacecubemulti/debug_skill```. Specifically, the abstract subtask tree will be stores as file ```store/tree_drawer_pickplacecubemulti/debug_skill/graph.pkl```, the low-level policies will be stored as file ```store/tree_drawer_pickplacecubemulti/debug_skill/model_<node_id>```, and the generated iterative program will be stored as file ```store/tree_drawer_pickplacecubemulti/debug_skill/iterative_program```. In addition, we retrain low-level policies during iterative program training and store the checkpoints as ```store/tree_drawer_pickplacecubemulti/debug_skill/policy_<policy_id>_<checkpoint_num>.pth```, where ```<policy_id>``` refers to the order of policy in the iterative program and the ```<checkpoint_num>``` refers to the training step where the policy is stored.
+
+An execution result is provided in ```logs_backup/tree_drawer_pickplacecubemulti.txt``` and ```store/tree_drawer_pickplacecubemulti```. **The expected time to run this environment is 120 hours with GPU.**
+
+---
+
 ### Evaluation for Transferability of Tower-5 Policies
 
 We evaluate the transferability of RoboScribe by applied the robot-control program generated on tower-5 environment to Pyramid and Multi-Tower environments (Figure 20 in the paper). For convenience, we provide the checkpoints and iterative program that we trained for tower-5 in the directory ```store_backup/tree_tower5_transfer_load```. Run the script to evaluate the transferability as:
