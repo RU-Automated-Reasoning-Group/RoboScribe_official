@@ -128,6 +128,19 @@ An execution result is provided in ```logs_backup/tree_drawer_pickplacecubemulti
 
 ---
 
+### MetaWorld Environment
+
+To run RoboScribe to generate robot-control program for MetaWorld environment (first figure in the second row of Figure.18 in the paper), run the script as:
+```
+sh main_v7_metaworld.sh
+```
+
+The script will take demonstration ```store/demo_store/new_metaworld.npy``` as input to synthesize abstract subtask tree and train low-level policies step-by-step. RoboScribe also generates iterative program for MetaWorld to handle arbitrary number of blocks and repeated routine. The log file will be stored in ```logs/tree_metaworld_seed0.txt```. The candidate abstraction predicate refinement for each step, the result abstract subtask trees and evaluation success rate to achieve speciftic reward are expected to be included in the log file. 
+
+The abstract subtask tree and low-level polices will be stored in ```store/tree_metaworld_seed0/debug_skill```. Specifically, the abstract subtask tree will be stores as file ```store/tree_metaworld_seed0/debug_skill/graph.pkl```, the low-level policies will be stored as file ```store/tree_metaworld_seed0/debug_skill/model_<node_id>```.
+
+---
+
 ### Evaluation for Transferability of Tower-5 Policies
 
 We evaluate the transferability of RoboScribe by applied the robot-control program generated on tower-5 environment to Pyramid and Multi-Tower environments (Figure 20 in the paper). For convenience, we provide the checkpoints and iterative program that we trained for tower-5 in the directory ```store_backup/tree_tower5_transfer_load```. Run the script to evaluate the transferability as:
