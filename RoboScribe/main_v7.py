@@ -18,7 +18,7 @@ import commentjson as json
 # import environment.Entity_Factored_RL_Env
 from environment.Entity_Factored_RL_Env.fetch_push_multi import FetchNPushEnv, FetchNPushObsWrapper
 from environment.fetch_custom.get_fetch_env import get_env, get_pickplace_env
-# from environment.metaworld.get_env import get_metaworld, metaworld_dropobs
+from environment.metaworld.get_env import get_metaworld, metaworld_dropobs
 from environment.cee_us_env.fpp_construction_env import FetchPickAndPlaceConstruction
 from environment.skill_env import AbsTransit_Push_Multi, AbsTransit_PickPlaceCube, AbsTransit_PickPlaceCubeMulti, AbsTransit_Opendrawer_PickPlaceCubeMulti, AbsTransit_Opendrawer_PickPlaceCubeMulti_2, AbsTransit_Pick_Multi_Branch
 from environment.skill_env import AbsTransit_MetaWorld, AbsTransit_Pick_Tower
